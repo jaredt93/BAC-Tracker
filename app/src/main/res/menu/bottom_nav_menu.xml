@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_bac_track"
+        android:icon="@drawable/ic_baseline_local_drink_24"
+        android:title="@string/title_bacTrack" />
+
+    <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_baseline_auto_graph_24"
+        android:title="@string/title_history" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/title_profile" />
+
+</menu>

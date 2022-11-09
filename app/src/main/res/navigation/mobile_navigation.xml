@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_bac_track">
+
+    <fragment
+        android:id="@+id/navigation_bac_track"
+        android:name="uncc.itis5280.bacapp.ui.bac.BACTrackFragment"
+        android:label="@string/title_bacTrack" />
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="uncc.itis5280.bacapp.ui.history.HistoryFragment"
+        android:label="@string/title_history" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="uncc.itis5280.bacapp.ui.profile.ProfileFragment"
+        android:label="@string/title_profile" />
+</navigation>
