@@ -1,0 +1,7 @@
+#Fri Nov 04 22:59:42 EDT 2022
+base.1=/Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
+path.1=classes.dex
+base.0=/Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=classes.dex

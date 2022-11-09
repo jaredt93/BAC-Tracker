@@ -1,0 +1,132 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/44767bd5285cd7ba483955fa34a15edc/appcompat-v7-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/854297921634781597476a840d6cc29c/support-fragment-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/8c5addf62784005fd26ad5fea55e2d41/animated-vector-drawable-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/58865b387dbca1c170bfef5921a20bbf/support-core-ui-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f4f242c071e1ce356a6e3f7a65597acc/support-core-utils-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/43a3c78ff3c244d8cf2c097e373f73fd/support-vector-drawable-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/fdd2b1a8694252043bfe689272a7f7a6/support-compat-27.1.1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/0948cd78537df87cc8ebafb17a00272a/livedata-core-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/306cc316fb45c9800f7514f65b312cca/viewmodel-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/e57171a9b616ccb445a88202aed2ea4b/runtime-1.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f9d0148ad76c4ed326c9cae59d3b61f9/runtime-1.1.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+	package
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:3:11-73
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:1-34:12
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:5:5-68
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:5:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:6:5-74
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:6:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:8:5-79
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:8:22-76
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:9:5-78
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:9:22-76
+uses-permission#android.permission.INTERNET
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:10:5-67
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:10:22-64
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:11:5-76
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:11:22-73
+uses-feature#android.hardware.bluetooth_le
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:13:5-15:35
+	android:required
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:15:9-32
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:14:9-53
+application
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:17:5-32:19
+	android:label
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:20:9-41
+	android:icon
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:19:9-42
+	android:allowBackup
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:18:9-35
+	android:theme
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:21:9-40
+activity#com.bactrack.backtrack_mobile.bactrackandroidsdkdemo.MainActivity
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:22:9-31:20
+	android:screenOrientation
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:25:13-49
+	android:label
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:24:13-45
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:23:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:26:13-30:29
+action#android.intent.action.MAIN
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:27:17-69
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:27:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:29:17-77
+	android:name
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml:29:27-74
+uses-sdk
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/44767bd5285cd7ba483955fa34a15edc/appcompat-v7-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/44767bd5285cd7ba483955fa34a15edc/appcompat-v7-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/854297921634781597476a840d6cc29c/support-fragment-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/854297921634781597476a840d6cc29c/support-fragment-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/8c5addf62784005fd26ad5fea55e2d41/animated-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/8c5addf62784005fd26ad5fea55e2d41/animated-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/58865b387dbca1c170bfef5921a20bbf/support-core-ui-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/58865b387dbca1c170bfef5921a20bbf/support-core-ui-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f4f242c071e1ce356a6e3f7a65597acc/support-core-utils-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f4f242c071e1ce356a6e3f7a65597acc/support-core-utils-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/43a3c78ff3c244d8cf2c097e373f73fd/support-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/43a3c78ff3c244d8cf2c097e373f73fd/support-vector-drawable-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/fdd2b1a8694252043bfe689272a7f7a6/support-compat-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/fdd2b1a8694252043bfe689272a7f7a6/support-compat-27.1.1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/0948cd78537df87cc8ebafb17a00272a/livedata-core-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/0948cd78537df87cc8ebafb17a00272a/livedata-core-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/306cc316fb45c9800f7514f65b312cca/viewmodel-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/306cc316fb45c9800f7514f65b312cca/viewmodel-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/e57171a9b616ccb445a88202aed2ea4b/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/e57171a9b616ccb445a88202aed2ea4b/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f9d0148ad76c4ed326c9cae59d3b61f9/runtime-1.1.0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /Users/jwtamuly@ncsu.edu/.gradle/caches/transforms-2/files-2.1/f9d0148ad76c4ed326c9cae59d3b61f9/runtime-1.1.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		ADDED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/jwtamuly@ncsu.edu/Downloads/BACtrack_v2.0.7_Android_SDK/app/src/main/AndroidManifest.xml
