@@ -25,11 +25,11 @@
     <string name="TEXT_ERR_NO_BREATHALYZERS_FOUND">Error: No breathalyzers found.</string>
     <string name="TEXT_ERR_BT_NOT_ENABLED">Error: Bluetooth is not enabled.</string>
     <string name="TEXT_ERR_BLE_NOT_SUPPORTED">Error: BLE is not supported on this device.</string>
-    <string name="TEXT_ERR_BLOW_ERROR">Error: Blow process failed.</string>
+    <string name="TEXT_ERR_BLOW_ERROR">Blow process failed.</string>
     <string name="TEXT_ERR_LOCATIONS_NOT_ENABLED">Error: Location services off.</string>
-    <string name="TEXT_ERR_TIMEOUT_ERROR">Error: Timed out waiting for user to blow.</string>
-    <string name="TEXT_ERR_LOW_BATTERY">Error: Battery low.</string>
-    <string name="TEXT_ERR_EXCEEDED_MAX_BAC">Error: BAC exceeded maximum.</string>
+    <string name="TEXT_ERR_TIMEOUT_ERROR">Timed out waiting for user to blow.</string>
+    <string name="TEXT_ERR_LOW_BATTERY">Battery low.</string>
+    <string name="TEXT_ERR_EXCEEDED_MAX_BAC">BAC exceeded maximum.</string>
     <string name="TEXT_ERR_UNKNOWN_PREFIX">Error code: </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

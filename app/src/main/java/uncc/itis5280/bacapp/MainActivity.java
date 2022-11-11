@@ -2,24 +2,22 @@ package uncc.itis5280.bacapp;
 
 import android.Manifest;
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
+import android.content.DialogInterface;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -27,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import BACtrackAPI.API.BACtrackAPI;
 import BACtrackAPI.API.BACtrackAPICallbacks;
+import BACtrackAPI.Commands.BLECommand;
 import BACtrackAPI.Constants.BACTrackDeviceType;
 import BACtrackAPI.Constants.BACtrackUnit;
 import BACtrackAPI.Constants.Errors;
@@ -38,6 +37,7 @@ import uncc.itis5280.bacapp.ui.bac.BACTrackFragment;
 
 public class MainActivity extends AppCompatActivity implements BACTrackFragment.IListener {
     private ActivityMainBinding binding;
+    NavController navController;
 
     private static String TAG = "JWT";
     private static final byte PERMISSIONS_FOR_SCAN = 100;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
     private BACtrackAPI mAPI;
     private Context context;
     private boolean waitingForBlow;
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,23 +60,11 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_bac_track, R.id.navigation_history, R.id.navigation_profile)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        this.registerReceiver(mBluetoothReceiver,
-                new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            Log.d(TAG, "onCreate: " + "location");
-            this.registerReceiver(mLocationServicesReceiver,
-                    new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-        }
-
         requestBlePermissions(this, 001);
-
-        initBacTrackAPI();
     }
 
     // Bluetooth Permissions
@@ -97,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
             ActivityCompat.requestPermissions(activity, BLE_PERMISSIONS, requestCode);
     }
 
+    // Initiate BAC Tracker
     protected void initBacTrackAPI() {
         String apiKey = "712d405434c64ec0aec98949490172";
 
@@ -107,111 +97,30 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         } catch (BluetoothLENotSupportedException e) {
             Log.d(TAG, "initBacTrackAPI: " + "testing bs");
             e.printStackTrace();
-            this.setStatus(R.string.TEXT_ERR_BLE_NOT_SUPPORTED);
+            setStatus(R.string.TEXT_ERR_BLE_NOT_SUPPORTED);
         } catch (BluetoothNotEnabledException e) {
             Log.d(TAG, "initBacTrackAPI: " + "testing be");
             e.printStackTrace();
-            this.setStatus(R.string.TEXT_ERR_BT_NOT_ENABLED);
+            setStatus(R.string.TEXT_ERR_BT_NOT_ENABLED);
         } catch (LocationServicesNotEnabledException e) {
             Log.d(TAG, "initBacTrackAPI: " + "testing");
             e.printStackTrace();
-            this.setStatus(R.string.TEXT_ERR_LOCATIONS_NOT_ENABLED);
+            setStatus(R.string.TEXT_ERR_LOCATIONS_NOT_ENABLED);
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_FOR_SCAN: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (mAPI == null)
-                        initBacTrackAPI();
-                    if (mAPI != null)   // check for success in case it was null before
-                        mAPI.connectToNearestBreathalyzer();
-                }
-            }
-        }
-    }
-
-    private final BroadcastReceiver mBluetoothReceiver = new BroadcastReceiver()
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            final String action = intent.getAction();
-
-            if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED))
-            {
-                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR);
-
-                switch (state)
-                {
-                    case BluetoothAdapter.STATE_OFF:
-                        setStatus(R.string.TEXT_ERR_BT_NOT_ENABLED);
-                        break;
-                    case BluetoothAdapter.STATE_ON:
-                        handleBluetoothOn();
-                        break;
-                }
-            }
-        }
-    };
-
-    protected void handleBluetoothOn() {
-        if (mAPI == null) {
-            initBacTrackAPI();
-        } else if (!areLocationServicesAvailable(context)) {
-            this.setStatus(R.string.TEXT_ERR_LOCATIONS_NOT_ENABLED);
-        } else {
-            this.setStatus(R.string.TEXT_DISCONNECTED);
-        }
-    }
-
-    private final BroadcastReceiver mLocationServicesReceiver = new BroadcastReceiver()
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            final String action = intent.getAction();
-
-            Log.d(TAG, "onReceive: " + "location received");
-            if (!areLocationServicesAvailable(context)) {
-                setStatus(R.string.TEXT_ERR_LOCATIONS_NOT_ENABLED);
-            }
-            else if (mAPI == null) {
-                initBacTrackAPI();
-            }
-            else if (!isBluetoothEnabled()){
-                setStatus(R.string.TEXT_ERR_BT_NOT_ENABLED);
-            }
-            else {
-                setStatus(R.string.TEXT_DISCONNECTED);
-            }
-        }
-    };
-
-    protected boolean isBluetoothEnabled()
-    {
+    protected boolean isBluetoothEnabled() {
         BluetoothManager bluetoothManager =
                 (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-
         return (bluetoothManager.getAdapter().isEnabled());
     }
 
-
-    protected static boolean areLocationServicesAvailable(Context context)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-        {
+    protected static boolean areLocationServicesAvailable(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             return lm.isLocationEnabled();
         }
-        else
-        {
+        else {
             int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
             return  (mode != Settings.Secure.LOCATION_MODE_OFF);
@@ -220,98 +129,161 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
 
     @Override
     public void connectNearestClicked() {
-        setStatus(R.string.TEXT_CONNECTING);
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_FOR_SCAN);
-        } else if (mAPI != null) {
-            /**
-             * Permission already granted, start scan.
-             */
+        if (mAPI == null) {
+            initBacTrackAPI();
+        }
+
+        if (mAPI != null && !mAPI.isConnected()) {
+            setStatus("Connecting...");
             mAPI.connectToNearestBreathalyzer();
-            //connectButton.setEnabled(false);
+        } else if (mAPI.isConnected()){
+            mAPI.disconnect();
         }
     }
 
+    @Override
+    public void startBacTestClicked() {
+        boolean result = false;
 
+        if (mAPI != null) {
+            bundle.putBoolean("countdownVisibility", false);
+            bundle.putBoolean("blowVisibility", false);
+            bundle.putBoolean("analyzeVisibility", false);
+            bundle.putBoolean("resultVisibility", false);
+            result = mAPI.startCountdown();
+        }
 
-    private void setStatus(int resourceId) {
-        this.setStatus(this.getResources().getString(resourceId));
+        if (!result)
+            Log.e(TAG, "mAPI.startCountdown() failed");
+        else
+            Log.d(TAG, "Blow process start requested");
     }
 
-    private void setStatus(final String message) {
+    private void setStatus(int resourceId) {
+        String status = this.getResources().getString(resourceId);
+        Log.d(TAG, "setStatus: " + status);
+        setStatus(status);
+    }
+
+    private void setStatus(String status) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+//                if(mAPI.isConnected()) {
+//                    bundle.putString("connectionStatus", "Connected");
+//                    bundle.putString("buttonStatus", "DISCONNECT DEVICE");
+//                } else {
+//                    bundle.putString("connectionStatus", status);
+//                    bundle.putString("buttonStatus", "CONNECT TO NEAREST DEVICE");
+//                }
+
+                if(!mAPI.isConnected()) {
+                    bundle.putString("connectionStatus", status);
+                    bundle.putString("buttonStatus", "CONNECT TO NEAREST DEVICE");
+                }
+
+                if(status.contains("Countdown")) {
+                    bundle.putBoolean("countdownVisibility", true);
+                    bundle.putString("direction", "Wait...");
+                    bundle.putString("countdownStatus", status.substring(11));
+                } else if (status.contains("Blow")) {
+                    bundle.putString("countdownStatus", "0");
+                    bundle.putString("direction", "Blow Now!");
+                    bundle.putBoolean("blowVisibility", true);
+                    bundle.putString("blowStatus", status.substring(5));
+                } else if (status.contains("Analyzing")) {
+                    bundle.putString("direction", "Wait...");
+                    bundle.putBoolean("analyzeVisibility", true);
+                    bundle.putString("analyzingStatus", status);
+                } else if (status.contains("Done")) {
+                    bundle.putString("direction", "Done!");
+                    bundle.putBoolean("resultVisibility", true);
+                    bundle.putString("result", status.substring(4));
+                }
+
+                navController.navigate(R.id.statusAction, bundle);
+
                 Log.d(TAG, "run: " + "status");
-                Log.d(TAG, message);
+                Log.d(TAG, status);
                 //statusMessageTextView.setText(String.format("Status:\n%s", message));
             }
         });
+    }
+
+    private class APIKeyVerificationAlert extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return urls[0];
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            AlertDialog.Builder apiApprovalAlert = new AlertDialog.Builder(context);
+            apiApprovalAlert.setTitle("API Approval Failed");
+            apiApprovalAlert.setMessage(result);
+            apiApprovalAlert.setPositiveButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            mAPI.disconnect();
+                            setStatus(R.string.TEXT_DISCONNECTED);
+                            dialog.cancel();
+                        }
+                    });
+
+            apiApprovalAlert.create();
+            apiApprovalAlert.show();
+        }
     }
 
     private final BACtrackAPICallbacks mCallbacks = new BACtrackAPICallbacks() {
 
         @Override
         public void BACtrackAPIKeyDeclined(String errorMessage) {
-            //APIKeyVerificationAlert verify = new APIKeyVerificationAlert();
-            //verify.execute(errorMessage);
+            APIKeyVerificationAlert verify = new APIKeyVerificationAlert();
+            verify.execute(errorMessage);
             Log.d(TAG, "BACtrackAPIKeyDeclined: ");
         }
 
         @Override
         public void BACtrackAPIKeyAuthorized() {
-
+            Log.d(TAG, "BACtrackAPIKeyAuthorized: ");
         }
 
         @Override
         public void BACtrackConnected(BACTrackDeviceType bacTrackDeviceType) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    setStatus(R.string.TEXT_CONNECTED);
-                    //disconnectButton.setEnabled(true);
-                }
-            });
+            bundle.putString("connectionStatus", "Connected");
+            bundle.putString("buttonStatus", "DISCONNECT DEVICE");
+            bundle.putBoolean("startVisibility", true);
+            setStatus("Connected");
         }
 
         @Override
         public void BACtrackDidConnect(String s) {
-            setStatus(R.string.TEXT_DISCOVERING_SERVICES);
+            bundle.putString("connectionStatus", "Discovering services...");
+            setStatus("Discovering services...");
         }
 
         @Override
         public void BACtrackDisconnected() {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (areLocationServicesAvailable(context) && isBluetoothEnabled())
-                        setStatus(R.string.TEXT_DISCONNECTED);    // else, other routines will tell the user to enable bt/loc
-//                    setBatteryStatus("");
-//                    setCurrentFirmware(null);
-//                    connectButton.setEnabled(true);
-//                    disconnectButton.setEnabled(false);
-                }
-            });
+            if (areLocationServicesAvailable(context) && isBluetoothEnabled()) {
+                setStatus(R.string.TEXT_DISCONNECTED);
+                bundle.putBoolean("startVisibility", false);
+                bundle.putBoolean("countdownVisibility", false);
+                bundle.putBoolean("blowVisibility", false);
+                bundle.putBoolean("analyzeVisibility", false);
+                bundle.putBoolean("resultVisibility", false);
+            }
         }
+
         @Override
         public void BACtrackConnectionTimeout() {
             setStatus("Connection timed out");
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    //connectButton.setEnabled(true);
-                    //disconnectButton.setEnabled(false);
-                }
-            });
         }
 
         @Override
         public void BACtrackFoundBreathalyzer(BACtrackAPI.BACtrackDevice device) {
+            setStatus("Found breathalyzer");
             Log.d(TAG, "Found breathalyzer : " + device.toString());
         }
 
@@ -323,13 +295,13 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         @Override
         public void BACtrackStart() {
             waitingForBlow = true;
-            setStatus(R.string.TEXT_BLOW_NOW);
+            setStatus("Blow!");
         }
 
         @Override
         public void BACtrackBlow(float breathVolumeRemaining) {
             if (waitingForBlow)
-                setStatus(String.format("Keep Blowing (%d%%)", 100 - (int)(100.0 * breathVolumeRemaining)));
+                setStatus(String.format("Blow Keep blowing(%d%%)", 100 - (int)(100.0 * breathVolumeRemaining)));
         }
 
         @Override
@@ -340,12 +312,12 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
 
         @Override
         public void BACtrackResults(float measuredBac) {
-            setStatus(getString(R.string.TEXT_FINISHED) + " " + measuredBac);
+            setStatus("Done" + measuredBac);
+            bundle.putFloat("measuredBac", measuredBac);
         }
 
         @Override
         public void BACtrackFirmwareVersion(String version) {
-            //setCurrentFirmware(version);
             setStatus(getString(R.string.TEXT_FIRMWARE_VERSION) + " " + version);
         }
 
@@ -358,25 +330,22 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         public void BACtrackUseCount(int useCount) {
             Log.d(TAG, "UseCount: " + useCount);
             // C6/C8 bug in hardware does not allow getting use count
-            if (useCount == 4096)
-            {
+            if (useCount == 4096) {
                 setStatus("Cannot retrieve use count for C6/C8 devices");
             }
-            else
-            {
+            else {
                 setStatus(getString(R.string.TEXT_USE_COUNT) + " " + useCount);
             }
         }
 
         @Override
         public void BACtrackBatteryVoltage(float voltage) {
-
+            //
         }
 
         @Override
         public void BACtrackBatteryLevel(int level) {
             //setBatteryStatus(getString(R.string.TEXT_BATTERY_LEVEL) + " " + level);
-
         }
 
         @Override
