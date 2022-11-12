@@ -2,7 +2,6 @@ package uncc.itis5280.bacapp.screens.profile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import uncc.itis5280.bacapp.screens.bac.Reading;
 
@@ -11,11 +10,11 @@ public class User implements Serializable {
     public static String MALE = "MALE";
 
     String id;
+    String email;
+    String password;
     String firstName;
     String lastName;
     String city;
-    String email;
-    String password;
     String gender;
     ArrayList<Reading> readingHistory;
 
@@ -23,13 +22,12 @@ public class User implements Serializable {
         // empty constructor
     }
 
-    public User(String id, String firstName, String lastName, String city, String email, String password, String gender, ArrayList<Reading> readingHistory) {
+    public User(String id, String email, String firstName, String lastName, String city, String gender, ArrayList<Reading> readingHistory) {
         this.id = id;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.city = city;
-        this.email = email;
-        this.password = password;
         this.gender = gender;
         this.readingHistory = readingHistory;
     }

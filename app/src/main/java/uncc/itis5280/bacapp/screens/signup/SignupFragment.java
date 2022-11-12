@@ -1,8 +1,6 @@
 package uncc.itis5280.bacapp.screens.signup;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -22,8 +21,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import uncc.itis5280.bacapp.R;
 import uncc.itis5280.bacapp.databinding.FragmentSignupBinding;
+import uncc.itis5280.bacapp.screens.bac.Reading;
 import uncc.itis5280.bacapp.screens.profile.User;
 import uncc.itis5280.bacapp.util.Globals;
 import uncc.itis5280.bacapp.util.RetrofitInterface;
@@ -122,28 +121,16 @@ public class SignupFragment extends Fragment {
 
                 if (firstName.isEmpty()) {
                     Toast.makeText(getActivity(), "First name is required", Toast.LENGTH_LONG).show();
-                    error[0] = "First name is required";
-                    showAlert(error[0]);
                 } else if (lastName.isEmpty()) {
                     Toast.makeText(getActivity(), "Last name is required", Toast.LENGTH_LONG).show();
-                    error[0] = "Last name is required";
-                    showAlert(error[0]);
                 } else if (city.isEmpty()) {
                     Toast.makeText(getActivity(), "City is required", Toast.LENGTH_LONG).show();
-                    error[0] = "City is required";
-                    showAlert(error[0]);
                 } else if (gender.isEmpty()) {
                     Toast.makeText(getActivity(), "Please select a gender", Toast.LENGTH_LONG).show();
-                    error[0] = "No gender selected";
-                    showAlert(error[0]);
                 } else if (email.isEmpty()) {
                     Toast.makeText(getActivity(), "Enter email", Toast.LENGTH_LONG).show();
-                    error[0] = "Valid email required";
-                    showAlert(error[0]);
                 } else if (password.isEmpty()) {
                     Toast.makeText(getActivity(), "Enter password", Toast.LENGTH_LONG).show();
-                    error[0] = "Password required";
-                    showAlert(error[0]);
                 } else {
                     HashMap<String, String> data = new HashMap<>();
                     data.put("email", email);
@@ -175,19 +162,5 @@ public class SignupFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void showAlert(String error) {
-        if (error != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Error")
-                    .setMessage(error)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-        }
     }
 }

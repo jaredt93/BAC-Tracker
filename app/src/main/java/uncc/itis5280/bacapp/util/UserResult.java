@@ -14,6 +14,7 @@ public class UserResult {
     String gender;
     ArrayList<Reading> readingHistory;
 
+    String token;
 
     public String getId() {
         return id;
@@ -77,6 +78,14 @@ public class UserResult {
 
     public void setReadingHistory(ArrayList<Reading> readingHistory) {
         this.readingHistory = readingHistory;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 
