@@ -13,11 +13,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
@@ -95,6 +98,28 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Bundle args = new Bundle();
+                Log.d(TAG, "onNavigationItemSelected: " + item + user);
+                args.putSerializable("user", user);
+
+                if (item.getItemId() == R.id.navigation_bac_track) {
+                    navController.navigate(R.id.navigation_bac_track);
+                    navController.navigate(R.id.action_navigation_bac_track_self, args);
+                } else if (item.getItemId() == R.id.navigation_history) {
+                    navController.navigate(R.id.navigation_history);
+                    navController.navigate(R.id.action_navigation_history_self, args);
+                } else if (item.getItemId() == R.id.navigation_profile) {
+                    navController.navigate(R.id.navigation_profile);
+                    navController.navigate(R.id.action_navigation_profile_self, args);
+                }
+
+                return false;
+            }
+        });
+        
         if (user == null) {
             navView.setVisibility(View.INVISIBLE);
         } else {
@@ -104,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
 
         requestBlePermissions(this, 001);
     }
+    
 
     // Bluetooth Permissions
     private static final String[] BLE_PERMISSIONS = new String[]{
@@ -454,6 +480,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
 
     @Override
     public void loginSuccess(String email, String password) {
+        binding.navView.setVisibility(View.VISIBLE);
         navController.navigate(R.id.action_loginFragment_to_navigation_bac_track);
         setUser(email, password);
     }
@@ -465,6 +492,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
 
     @Override
     public void signupSuccess(String email, String password) {
+        binding.navView.setVisibility(View.VISIBLE);
         navController.navigate(R.id.action_signupFragment_to_navigation_bac_track);
         setUser(email, password);
     }
@@ -472,7 +500,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
     // Profile methods
     @Override
     public void signOut() {
-
+        navController.navigate(R.id.action_navigation_profile_to_navigation_login);
+        binding.navView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -484,7 +513,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         String savedToken = sharedPref.getString(SHARED_PREF_JWT_TOKEN, null);
         String savedEmail = sharedPref.getString(SHARED_PREF_EMAIL, null);
-
 
         if (savedToken == null || savedEmail == null) return;
 

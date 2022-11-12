@@ -54,14 +54,6 @@ public class ProfileFragment extends Fragment {
         //empty
     }
 
-    public static ProfileFragment newInstance(User user) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(USER, user);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +67,8 @@ public class ProfileFragment extends Fragment {
                 .build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        user = (User)getArguments().getSerializable("user");
     }
 
     @Override
@@ -90,14 +84,16 @@ public class ProfileFragment extends Fragment {
         binding.imageButtonSave.setVisibility(View.VISIBLE);
         binding.imageButtonLogout.setVisibility(View.VISIBLE);
 
-        binding.inputUserProfileFirstName.setText(user.getFirstName());
-        binding.inputUserProfileLastName.setText(user.getLastName());
-        binding.inputUserProfileCity.setText(user.getCity());
+        if (user != null) {
+            binding.inputUserProfileFirstName.setText(user.getFirstName());
+            binding.inputUserProfileLastName.setText(user.getLastName());
+            binding.inputUserProfileCity.setText(user.getCity());
 
-        if (User.FEMALE.equals(user.getGender())) {
-            binding.radioBtnUserProfileFemale.setChecked(true);
-        } else if (User.MALE.equals(user.getGender())) {
-            binding.radioBtnUserProfileMale.setChecked(true);
+            if (User.FEMALE.equals(user.getGender())) {
+                binding.radioBtnUserProfileFemale.setChecked(true);
+            } else if (User.MALE.equals(user.getGender())) {
+                binding.radioBtnUserProfileMale.setChecked(true);
+            }
         }
 
         return binding.getRoot();
@@ -153,20 +149,12 @@ public class ProfileFragment extends Fragment {
 
                 if (firstName.isEmpty()) {
                     Toast.makeText(getActivity(), "First name is required", Toast.LENGTH_LONG).show();
-                    error[0] = "First name is required";
-                    showAlert(error[0]);
                 } else if (lastName.isEmpty()) {
                     Toast.makeText(getActivity(), "Last name is required", Toast.LENGTH_LONG).show();
-                    error[0] = "Last name is required";
-                    showAlert(error[0]);
                 } else if (city.isEmpty()) {
                     Toast.makeText(getActivity(), "City is required", Toast.LENGTH_LONG).show();
-                    error[0] = "City is required";
-                    showAlert(error[0]);
                 } else if (gender.isEmpty()) {
                     Toast.makeText(getActivity(), "Please select a gender", Toast.LENGTH_LONG).show();
-                    error[0] = "No gender selected";
-                    showAlert(error[0]);
                 } else {
                     HashMap<String, Object> data = new HashMap<>();
                     data.put("email", user.email);
@@ -184,19 +172,5 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void showAlert(String error) {
-        if (error != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Error")
-                    .setMessage(error)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).show();
-        }
     }
 }

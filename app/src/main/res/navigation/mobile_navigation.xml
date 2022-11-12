@@ -23,17 +23,42 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="CONNECT TO NEAREST DEVICE" />
+        <action
+            android:id="@+id/action_navigation_bac_track_self"
+            app:destination="@id/navigation_bac_track"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_history"
         android:name="uncc.itis5280.bacapp.screens.history.HistoryFragment"
-        android:label="@string/title_history" />
+        android:label="@string/title_history" >
+        <action
+            android:id="@+id/action_navigation_history_self"
+            app:destination="@id/navigation_history"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="uncc.itis5280.bacapp.screens.profile.ProfileFragment"
-        android:label="@string/title_profile" />
+        android:label="@string/title_profile" >
+        <argument
+            android:name="user"
+            app:argType="uncc.itis5280.bacapp.screens.profile.User" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_login"
+            app:destination="@id/navigation_login"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_profile_self"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_login"
         android:name="uncc.itis5280.bacapp.screens.login.LoginFragment"
@@ -45,8 +70,9 @@
         <action
             android:id="@+id/action_loginFragment_to_navigation_bac_track"
             app:destination="@id/navigation_bac_track"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation_bac_track" />
+            app:launchSingleTop="false"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/navigation_signup"
@@ -55,8 +81,8 @@
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/navigation_login"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/navigation_login" />
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signupFragment_to_navigation_bac_track"
             app:destination="@id/navigation_bac_track"
