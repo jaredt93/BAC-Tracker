@@ -23,9 +23,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.HashMap;
+
 import BACtrackAPI.API.BACtrackAPI;
 import BACtrackAPI.API.BACtrackAPICallbacks;
-import BACtrackAPI.Commands.BLECommand;
 import BACtrackAPI.Constants.BACTrackDeviceType;
 import BACtrackAPI.Constants.BACtrackUnit;
 import BACtrackAPI.Constants.Errors;
@@ -33,9 +34,13 @@ import BACtrackAPI.Exceptions.BluetoothLENotSupportedException;
 import BACtrackAPI.Exceptions.BluetoothNotEnabledException;
 import BACtrackAPI.Exceptions.LocationServicesNotEnabledException;
 import uncc.itis5280.bacapp.databinding.ActivityMainBinding;
-import uncc.itis5280.bacapp.ui.bac.BACTrackFragment;
+import uncc.itis5280.bacapp.screens.bac.BACTrackFragment;
+import uncc.itis5280.bacapp.screens.login.LoginFragment;
+import uncc.itis5280.bacapp.screens.profile.ProfileFragment;
+import uncc.itis5280.bacapp.screens.profile.User;
+import uncc.itis5280.bacapp.screens.signup.SignupFragment;
 
-public class MainActivity extends AppCompatActivity implements BACTrackFragment.IListener {
+public class MainActivity extends AppCompatActivity implements LoginFragment.IListener, SignupFragment.IListener, BACTrackFragment.IListener, ProfileFragment.IListener {
     private ActivityMainBinding binding;
     NavController navController;
 
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
     private Context context;
     private boolean waitingForBlow;
     Bundle bundle = new Bundle();
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +64,18 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_bac_track, R.id.navigation_history, R.id.navigation_profile)
+                R.id.navigation_bac_track, R.id.navigation_history, R.id.navigation_profile, R.id.navigation_login, R.id.navigation_signup)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        if (user == null) {
+            navView.setVisibility(View.INVISIBLE);
+        } else {
+            navView.setVisibility(View.VISIBLE);
+            navController.navigate(R.id.navigation_bac_track);
+        }
 
         requestBlePermissions(this, 001);
     }
@@ -169,14 +182,6 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                if(mAPI.isConnected()) {
-//                    bundle.putString("connectionStatus", "Connected");
-//                    bundle.putString("buttonStatus", "DISCONNECT DEVICE");
-//                } else {
-//                    bundle.putString("connectionStatus", status);
-//                    bundle.putString("buttonStatus", "CONNECT TO NEAREST DEVICE");
-//                }
-
                 if(!mAPI.isConnected()) {
                     bundle.putString("connectionStatus", status);
                     bundle.putString("buttonStatus", "CONNECT TO NEAREST DEVICE");
@@ -205,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
 
                 Log.d(TAG, "run: " + "status");
                 Log.d(TAG, status);
-                //statusMessageTextView.setText(String.format("Status:\n%s", message));
             }
         });
     }
@@ -377,4 +381,35 @@ public class MainActivity extends AppCompatActivity implements BACTrackFragment.
         }
     };
 
+    // Register and Login methods
+    @Override
+    public void signup() {
+        navController.navigate(R.id.action_loginFragment_to_signupFragment);
+    }
+
+    @Override
+    public void loginSuccess(String email, String password) {
+        navController.navigate(R.id.action_loginFragment_to_navigation_bac_track);
+    }
+
+    @Override
+    public void registerCancelled() {
+        navController.navigate(R.id.action_signupFragment_to_loginFragment);
+    }
+
+    @Override
+    public void signupSuccess(String email, String password) {
+        navController.navigate(R.id.action_signupFragment_to_navigation_bac_track);
+    }
+
+    // Profile methods
+    @Override
+    public void signOut() {
+
+    }
+
+    @Override
+    public void updateUserProfile(HashMap<String, Object> data, User user) {
+
+    }
 }

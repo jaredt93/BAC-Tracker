@@ -1,8 +1,7 @@
-package uncc.itis5280.bacapp.ui.bac;
+package uncc.itis5280.bacapp.screens.bac;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

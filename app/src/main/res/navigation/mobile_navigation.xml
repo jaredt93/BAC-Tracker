@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_bac_track">
+    app:startDestination="@id/navigation_login">
 
     <fragment
         android:id="@+id/navigation_bac_track"
-        android:name="uncc.itis5280.bacapp.ui.bac.BACTrackFragment"
+        android:name="uncc.itis5280.bacapp.screens.bac.BACTrackFragment"
         android:label="@string/title_bacTrack" >
         <action
             android:id="@+id/statusAction"
@@ -27,33 +27,40 @@
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="uncc.itis5280.bacapp.ui.history.HistoryFragment"
+        android:name="uncc.itis5280.bacapp.screens.history.HistoryFragment"
         android:label="@string/title_history" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="uncc.itis5280.bacapp.ui.profile.ProfileFragment"
+        android:name="uncc.itis5280.bacapp.screens.profile.ProfileFragment"
         android:label="@string/title_profile" />
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="uncc.itis5280.bacapp.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:id="@+id/navigation_login"
+        android:name="uncc.itis5280.bacapp.screens.login.LoginFragment"
+        android:label="Login">
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/navigation_signup"
+            app:popUpTo="@id/navigation_login" />
         <action
             android:id="@+id/action_loginFragment_to_navigation_bac_track"
-            app:destination="@id/navigation_bac_track" />
+            app:destination="@id/navigation_bac_track"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bac_track" />
     </fragment>
     <fragment
-        android:id="@+id/signupFragment"
-        android:name="uncc.itis5280.bacapp.ui.signup.SignupFragment"
-        android:label="SignupFragment" >
+        android:id="@+id/navigation_signup"
+        android:name="uncc.itis5280.bacapp.screens.signup.SignupFragment"
+        android:label="Signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/navigation_login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_login" />
         <action
             android:id="@+id/action_signupFragment_to_navigation_bac_track"
-            app:destination="@id/navigation_bac_track" />
+            app:destination="@id/navigation_bac_track"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bac_track" />
     </fragment>
 </navigation>

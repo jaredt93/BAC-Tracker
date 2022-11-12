@@ -1,14 +1,12 @@
-package uncc.itis5280.bacapp.ui.history;
+package uncc.itis5280.bacapp.screens.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import uncc.itis5280.bacapp.databinding.FragmentHistoryBinding;
 

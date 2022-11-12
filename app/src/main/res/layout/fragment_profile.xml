@@ -12,7 +12,7 @@
         android:id="@+id/inputUserProfileLastName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
@@ -20,13 +20,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonSave" />
+        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileFirstName" />
 
     <EditText
         android:id="@+id/inputUserProfileFirstName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
@@ -34,35 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/inputUserProfileLastName"
-        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileLastName" />
-
-    <EditText
-        android:id="@+id/inputUserProfileAge"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Age, i.e. 18"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:numeric="signed|integer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/inputUserProfileFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileFirstName" />
-
-    <EditText
-        android:id="@+id/inputUserProfileAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:hint="Address, i.e. 123 E Street"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileAge" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonSave" />
 
     <EditText
         android:id="@+id/inputUserProfileCity"
@@ -74,8 +46,8 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/inputUserProfileAddress"
-        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileAddress" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputUserProfileLastName" />
 
 
     <RadioGroup
