@@ -28,6 +28,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import BACtrackAPI.API.BACtrackAPI;
@@ -45,6 +46,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import uncc.itis5280.bacapp.databinding.ActivityMainBinding;
 import uncc.itis5280.bacapp.screens.bac.BACTrackFragment;
+import uncc.itis5280.bacapp.screens.bac.Reading;
 import uncc.itis5280.bacapp.screens.login.LoginFragment;
 import uncc.itis5280.bacapp.screens.profile.ProfileFragment;
 import uncc.itis5280.bacapp.screens.profile.User;
@@ -369,6 +371,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
         public void BACtrackResults(float measuredBac) {
             setStatus("Done" + measuredBac);
             bundle.putFloat("measuredBac", measuredBac);
+            ArrayList<Reading> readings = user.getReadingHistory();
+            readings.add(new Reading(measuredBac, readings.size() + 1));
+            user.setReadingHistory(readings);
         }
 
         @Override

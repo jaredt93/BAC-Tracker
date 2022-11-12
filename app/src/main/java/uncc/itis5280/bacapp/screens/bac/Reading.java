@@ -2,15 +2,15 @@ package uncc.itis5280.bacapp.screens.bac;
 
 public class Reading {
     Float bac;
-    String date;
+    int id;
 
     public Reading() {
         //empty
     }
 
-    public Reading(Float bac, String date) {
+    public Reading(Float bac, int id) {
         this.bac = bac;
-        this.date = date;
+        this.id = id;
     }
 
     public Float getBac() {
@@ -21,11 +21,11 @@ public class Reading {
         this.bac = bac;
     }
 
-    public String getDate() {
-        return date;
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
     }
 }
