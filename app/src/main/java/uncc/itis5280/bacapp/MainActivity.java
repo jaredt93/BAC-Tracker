@@ -259,7 +259,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
                     bundle.putString("result", status.substring(4));
                 }
 
-                navController.navigate(R.id.statusAction, bundle);
+                if (navController.getCurrentDestination().getId() == R.id.navigation_bac_track) {
+                    navController.navigate(R.id.statusAction, bundle);
+                }
 
                 Log.d(TAG, "run: " + "status");
                 Log.d(TAG, status);
