@@ -162,6 +162,7 @@ public class ProfileFragment extends Fragment {
                     data.put("lastName", lastName);
                     data.put("city", city);
                     data.put("gender", gender);
+                    data.put("readingHistory", user.readingHistory);
 
                     user.setFirstName(firstName);
                     user.setLastName(lastName);

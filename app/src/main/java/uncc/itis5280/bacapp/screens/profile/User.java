@@ -17,12 +17,13 @@ public class User implements Serializable {
     String city;
     String gender;
     ArrayList<Reading> readingHistory;
+    String token;
 
     public User() {
         // empty constructor
     }
 
-    public User(String id, String email, String firstName, String lastName, String city, String gender, ArrayList<Reading> readingHistory) {
+    public User(String id, String email, String firstName, String lastName, String city, String gender, ArrayList<Reading> readingHistory, String token) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -30,6 +31,7 @@ public class User implements Serializable {
         this.city = city;
         this.gender = gender;
         this.readingHistory = readingHistory;
+        this.token = token;
     }
 
     public String getId() {
@@ -94,6 +96,14 @@ public class User implements Serializable {
 
     public void setReadingHistory(ArrayList<Reading> readingHistory) {
         this.readingHistory = readingHistory;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
 
