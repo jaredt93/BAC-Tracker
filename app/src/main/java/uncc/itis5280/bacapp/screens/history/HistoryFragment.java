@@ -39,7 +39,6 @@ public class HistoryFragment extends Fragment {
         chart = (LineChart) binding.chart;
         chart.setTouchEnabled(true);
         chart.setPinchZoom(true);
-
         return root;
     }
 
@@ -54,7 +53,6 @@ public class HistoryFragment extends Fragment {
             }
             chart.animateXY(1000, 1000);
             chart.invalidate();
-
             chart.getDescription().setText("BAC History");
 
             if(getDataSet().getXMax() <= 10) {
@@ -68,18 +66,21 @@ public class HistoryFragment extends Fragment {
                 chart.setVisibleXRange(getDataSet().getXMax() - 9, getDataSet().getXMax());
             }
 
-
             chart.getXAxis().setLabelCount(11, /*force: */true);
 
             chart.getAxisLeft().setAxisMinimum(0);
-            chart.getAxisLeft().setAxisMaximum((float) 0.50);
+            chart.getAxisLeft().setAxisMaximum((float) 0.54);
             chart.getAxisRight().setAxisMinimum(0);
-            chart.getAxisRight().setAxisMaximum((float) 0.50);
-            chart.setVisibleYRange(0, (float) 0.50, YAxis.AxisDependency.LEFT);
+            chart.getAxisRight().setAxisMaximum((float) 0.54);
+            chart.setVisibleYRange(0, (float) 0.54, YAxis.AxisDependency.LEFT);
+            chart.setVisibleYRange(0, (float) 0.54, YAxis.AxisDependency.RIGHT);
 
-            chart.getAxisLeft().setLabelCount(26, /*force: */true);
-            chart.getAxisRight().setLabelCount(26, /*force: */true);
+            chart.getAxisLeft().setLabelCount(28, /*force: */true);
+            chart.getAxisRight().setLabelCount(28, /*force: */true);
             chart.setDrawGridBackground(false);
+
+            chart.getExtraLeftOffset();
+            chart.getExtraRightOffset();
         }
     }
 
@@ -92,11 +93,12 @@ public class HistoryFragment extends Fragment {
             values.add(new Entry(reading.getId(), reading.getBac()));
         }
 
-        LineDataSet set = new LineDataSet(values, "BAC readings");
+        LineDataSet set = new LineDataSet(values, "Past BAC Readings");
         set.setColor(Color.RED);
-        set.setDrawFilled(true);
-        set.setFillColor(Color.RED);
+        set.setCircleRadius(3);
+        set.setLineWidth(2);
         set.setValueTextSize(14);
+        set.setCircleHoleColor(Color.DKGRAY);
         set.setCircleColor(Color.DKGRAY);
         set.setValueFormatter(new ChartValueFormatter());
         return set;
