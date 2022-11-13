@@ -374,6 +374,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
             ArrayList<Reading> readings = user.getReadingHistory();
             readings.add(new Reading(measuredBac, readings.size() + 1));
             user.setReadingHistory(readings);
+
+            Log.d(TAG, "BACtrackResults: " + user.getReadingHistory().toString());
+
+            HashMap<String, Object> data = putUserData(readings);
+            updateUser(data, user, true);
         }
 
         @Override
@@ -449,9 +454,18 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
             public void onResponse(Call<UserResult> call, Response<UserResult> response) {
                 if (response.code() == 200) {
                     UserResult result = response.body();
+
+                    ArrayList<Reading> readingHistory;
+
+                    if (result.getReadingHistory() == null) {
+                        readingHistory = new ArrayList<>();
+                    } else {
+                        readingHistory = result.getReadingHistory();
+                    }
+
                     user = new User(result.getId(), result.getEmail(), result.getFirstName(),
                             result.getLastName(), result.getCity(),
-                            result.getGender(), result.getReadingHistory());
+                            result.getGender(), readingHistory, result.getToken());
 
                     SharedPreferences sharedPref = mainActivity.getPreferences(Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
@@ -509,9 +523,47 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
         binding.navView.setVisibility(View.INVISIBLE);
     }
 
+    private HashMap<String, Object> putUserData(ArrayList<Reading> readingHistory) {
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("email", user.getEmail());
+        data.put("firstName", user.getFirstName());
+        data.put("lastName", user.getLastName());
+        data.put("city", user.getCity());
+        data.put("gender", user.getGender());
+        data.put("readingHistory", readingHistory);
+
+        return data;
+    }
+
+    private void updateUser(HashMap<String, Object> data, User user, Boolean reading) {
+        this.user = user;
+        Call<UserResult> call = retrofitInterface.updateUser(user.getToken(), data);
+        call.enqueue(new Callback<UserResult>() {
+            @Override
+            public void onResponse(Call<UserResult> call, Response<UserResult> response) {
+                if (response.code() == 200) {
+                    UserResult result = response.body();
+                    if (reading) {
+                        Toast.makeText(getApplicationContext(), "BAC reading saved", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Profile updated", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Something went wrong. Logout and log back in.", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResult> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
     @Override
     public void updateUserProfile(HashMap<String, Object> data, User user) {
-
+        updateUser(data, user, false);
     }
 
     private void createUserViaToken() {
@@ -532,7 +584,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.ILi
                     UserResult result = response.body();
                     user = new User(result.getId(), result.getEmail(), result.getFirstName(),
                             result.getLastName(), result.getCity(),
-                            result.getGender(), result.getReadingHistory());
+                            result.getGender(), result.getReadingHistory(), result.getToken());
 
                     sharedPref.edit().putString(SHARED_PREF_JWT_TOKEN, result.getToken());
                     sharedPref.edit().putString(SHARED_PREF_EMAIL, result.getEmail());
